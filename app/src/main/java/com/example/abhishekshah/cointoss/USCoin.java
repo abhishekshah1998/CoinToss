@@ -77,8 +77,8 @@ public class USCoin extends AppCompatActivity {
                 if (pressureValue.getAction() == pressureValue.ACTION_DOWN ) {
                    // float pressure = pressureValue.getPressure();
                     float pressure = (float)(seekBar.getProgress());
-                    float j= (float)(pressure/8333.33);
-                    float rotations = (float)(j*j*509295.818);
+                    float j= (float)(pressure/58333.33);
+                    float rotations = (float)(j*j*31830988.5);
                     rotationDisplay.setText("Rotations: " + (int) rotations);
                     flipCoin(rotations);
                     return true;
