@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="@color/white"
+    tools:context="com.example.abhishekshah.cointoss.IndiaCoin">
+    <!--android:background="@drawable/background"-->
+
+
+    <include
+        layout="@layout/video_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:background="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/rotation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="36sp" />
+
+    <EditText
+        android:id="@+id/coinInfoIndia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rotation"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="5dp"
+        android:background="#00000000"
+        android:text="Country: India\nCoin Weight: 5 grams\nCoin Radius: 1 cm "
+        android:textColor="#FFFFFF" />
+
+    <ImageView
+        android:id="@+id/coin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/heads" />
+
+    <ImageButton
+        android:id="@+id/nextActivity"
+        android:layout_width="60sp"
+        android:layout_height="60sp"
+        android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/transparent"
+        android:gravity="center_horizontal|center_vertical"
+        app:srcCompat="@android:drawable/ic_media_ff" />
+
+    <TextView
+        android:id="@+id/info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/seekvalue"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
+        android:gravity="center_horizontal|center_vertical"
+        android:paddingTop="10dp"
+        android:text="Drag slider and adjust the Force"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/seekvalue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/seekBar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:gravity="center_horizontal|center_vertical"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp" />
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/flipButton"
+        android:layout_marginBottom="15dp"
+        android:max="100"
+        android:progress="3"
+        android:progressDrawable="@drawable/seekbar_drawable_progress"
+        android:splitTrack="false"
+        android:thumb="@drawable/seekbar_drawable_thumb" />
+
+    <Button
+        android:id="@+id/flipButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/lightWhite"
+        android:text="@string/flipcoin"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+</RelativeLayout>

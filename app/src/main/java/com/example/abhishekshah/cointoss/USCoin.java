@@ -1,58 +1,83 @@
 package com.example.abhishekshah.cointoss;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
+import android.content.Intent;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatTextView;
-import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.view.MotionEvent;
+import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.abhishekshah.cointoss.R;
-
-import java.util.Random;
-
-public class MainActivity extends AppCompatActivity {
+public class USCoin extends AppCompatActivity {
 
     private static final String COIN_SIDE = "coin side";
-
     private ImageView coinImage;
     private Button flipButton;
-
-    private TextView pressureDisplay;
     private TextView rotationDisplay;
+    private TextView info;
     private int coinSide;
-
+    private SeekBar seekBar;
+    private TextView seekValue;
+    private Uri uri;
+    private EditText coinInfoUS;
+    private ImageButton previousActivity;
     private MediaPlayer mp;
-    private int curSide = R.drawable.heads;
-    private MotionEvent pressureValue;
+    private int curSide = R.drawable.us_heads;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.us_coin);
         coinImage = (ImageView) findViewById(R.id.coin);
         flipButton = (Button) findViewById(R.id.flipButton);
-        pressureDisplay = (TextView) findViewById(R.id.pressure);
         rotationDisplay=(TextView) findViewById(R.id.rotation);
+        seekBar = (SeekBar) findViewById(R.id.seekBar);
+        seekValue = (TextView) findViewById(R.id.seekvalue);
+        info = (TextView) findViewById(R.id.info);
+        coinInfoUS= (EditText) findViewById(R.id.coinInfoIndia);
+        previousActivity= (ImageButton)findViewById(R.id.nextActivity);
+
+        previousActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(USCoin.this, IndiaCoin.class);
+                startActivity(intent);
+                overridePendingTransition(0, 0);
+            }
+        });
+
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {}
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                seekValue.setText("Force: "+String.format("%.4f",(float)(seekBar.getProgress()/8333.33))+" Newton");
+            }
+        });
+
 
         flipButton.setOnTouchListener(new View.OnTouchListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public boolean onTouch(View v, MotionEvent pressureValue) {
                 if (pressureValue.getAction() == pressureValue.ACTION_DOWN ) {
-                    float pressure = pressureValue.getPressure();
-                    pressureDisplay.setText("Screen Pressure: " + (float) pressure);
-                    float j= (float)(pressure/25);
+                   // float pressure = pressureValue.getPressure();
+                    float pressure = (float)(seekBar.getProgress());
+                    float j= (float)(pressure/8333.33);
                     float rotations = (float)(j*j*509295.818);
                     rotationDisplay.setText("Rotations: " + (int) rotations);
                     flipCoin(rotations);
@@ -87,10 +112,11 @@ public class MainActivity extends AppCompatActivity {
 
         Rotate3dAnimation animation;
 
-        if (curSide == R.drawable.heads) {
-            animation = new Rotate3dAnimation(coinImage, R.drawable.heads, R.drawable.tails, 0, 180, 0, 0, 0, 0);
+        if (curSide == R.drawable.us_heads) {
+            animation = new Rotate3dAnimation(coinImage, R.drawable.us_heads, R.drawable.us_tails, 0, 180, 0, 0, 0, 0);
+
         } else {
-            animation = new Rotate3dAnimation(coinImage, R.drawable.tails, R.drawable.heads, 0, 180, 0, 0, 0, 0);
+            animation = new Rotate3dAnimation(coinImage, R.drawable.us_tails, R.drawable.us_heads, 0, 180, 0, 0, 0, 0);
         }
         if (stayTheSame) {
             animation.setRepeatCount((int) rotations); // must be odd (5+1 = 6 flips so the side will stay the same)
@@ -117,9 +143,9 @@ public class MainActivity extends AppCompatActivity {
 
         if (coinSide == 0) {
 
-            boolean stayTheSame = (curSide == R.drawable.tails);
+            boolean stayTheSame = (curSide == R.drawable.us_tails);
             long timeOfAnimation = animateCoin(stayTheSame,rotations);
-            curSide = R.drawable.tails;
+            curSide = R.drawable.us_tails;
 
             final Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
@@ -131,9 +157,9 @@ public class MainActivity extends AppCompatActivity {
 
         } else {
 
-            boolean stayTheSame = (curSide == R.drawable.heads);
+            boolean stayTheSame = (curSide == R.drawable.us_heads);
             long timeOfAnimation = animateCoin(stayTheSame,rotations);
-            curSide = R.drawable.heads;
+            curSide = R.drawable.us_heads;
 
             final Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
