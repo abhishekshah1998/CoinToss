@@ -40,7 +40,8 @@
         android:id="@+id/coin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_above="@+id/info"
+        android:layout_centerHorizontal="true"
         android:src="@drawable/heads" />
 
     <ImageButton
@@ -58,14 +59,37 @@
         android:id="@+id/info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/seekvalue"
+        android:layout_above="@+id/seekvalue2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:gravity="center_horizontal|center_vertical"
+        android:paddingTop="10dp"
+        android:text="Drag slider and adjust the force and distance from radius."
+        android:textColor="#FFFFFF"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/seekvalue2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/seekBar2"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="15dp"
         android:gravity="center_horizontal|center_vertical"
-        android:paddingTop="10dp"
-        android:text="Drag slider and adjust the Force"
         android:textColor="#FFFFFF"
         android:textSize="24sp" />
+
+    <SeekBar
+        android:id="@+id/seekBar2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/seekvalue"
+        android:layout_marginBottom="10dp"
+        android:max="100"
+        android:progress="3"
+        android:progressDrawable="@drawable/seekbar_drawable_progress"
+        android:splitTrack="false"
+        android:thumb="@drawable/seekbar_drawable_thumb" />
 
     <TextView
         android:id="@+id/seekvalue"
@@ -73,7 +97,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/seekBar"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="15dp"
         android:gravity="center_horizontal|center_vertical"
         android:textColor="#FFFFFF"
         android:textSize="30sp" />
@@ -83,7 +107,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/flipButton"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="10dp"
         android:max="100"
         android:progress="3"
         android:progressDrawable="@drawable/seekbar_drawable_progress"

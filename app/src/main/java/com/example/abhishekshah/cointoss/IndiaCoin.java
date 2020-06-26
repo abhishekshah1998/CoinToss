@@ -30,7 +30,9 @@ public class IndiaCoin extends AppCompatActivity {
     private TextView info;
     private int coinSide;
     private SeekBar seekBar;
+    private SeekBar seekBar2;
     private TextView seekValue;
+    private TextView seekValue2;
     private VideoView mVideoView;
     private Uri uri;
     private EditText coinInfoIndia;
@@ -47,7 +49,9 @@ public class IndiaCoin extends AppCompatActivity {
         flipButton = (Button) findViewById(R.id.flipButton);
         rotationDisplay=(TextView) findViewById(R.id.rotation);
         seekBar = (SeekBar) findViewById(R.id.seekBar);
+        seekBar2 = (SeekBar) findViewById(R.id.seekBar2);
         seekValue = (TextView) findViewById(R.id.seekvalue);
+        seekValue2 = (TextView) findViewById(R.id.seekvalue2);
         info = (TextView) findViewById(R.id.info);
         coinInfoIndia= (EditText) findViewById(R.id.coinInfoIndia);
         nextActivity = (ImageButton)findViewById(R.id.nextActivity);
@@ -62,6 +66,20 @@ public class IndiaCoin extends AppCompatActivity {
                 overridePendingTransition(0, 0);
             }
         });
+
+        seekBar2.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {}
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                seekValue2.setText("Distance from center: "+String.valueOf((float)(seekBar.getProgress()/10))+" mm");
+            }
+        });
+
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -85,11 +103,14 @@ public class IndiaCoin extends AppCompatActivity {
                    // float pressure = pressureValue.getPressure();
                     float pressure = (float)(seekBar.getProgress());
                     float j= (float)(pressure/8333.33);
-                    float rotations = (float)(j*j*509295.818);
+                    float distance = (float)(seekBar2.getProgress());
+                    float d=(float)(distance/100);
+                    float rotations = (float)(j*j*d*509295.818);
                     rotationDisplay.setText("Rotations: " + (int) rotations);
                     Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.back);
                     info.setVisibility(View.INVISIBLE);
                     seekValue.setTextColor(Color.parseColor("#000000"));
+                    seekValue2.setTextColor(Color.parseColor("#000000"));
                     coinInfoIndia.setTextColor(Color.parseColor("#000000"));
                     mVideoView.setVideoURI(uri);
                     mVideoView.start();
